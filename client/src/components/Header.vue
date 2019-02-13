@@ -1,9 +1,9 @@
 <template>
   <v-toolbar fixed class="cyan" dark>
     <v-toolbar-title class="mr-4">
-      <span @click="navigateTo({name: 'root'})">
+      <v-btn @click="navigateTo({name: 'root'})" flat dark>
         ShopsNearU
-      </span>
+      </v-btn>
     </v-toolbar-title>
 
     <v-spacer></v-spacer>

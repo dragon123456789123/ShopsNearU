@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon src/app.js --exec \"npm run node\""
+    "start": "node src/app.js --exec \"npm run node\""
   },
   "keywords": [],
   "author": "",
@@ -23,6 +23,8 @@
     "express-session": "^1.13.0",
     "express-validator": "^5.3.1",
     "hbs": "^4.0.1",
+    "joi": "^14.3.1",
+    "jsonwebtoken": "^8.4.0",
     "moment": "^2.24.0",
     "mongoose": "^4.4.16",
     "morgan": "^1.9.1",

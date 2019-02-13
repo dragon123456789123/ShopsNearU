@@ -6,6 +6,9 @@ const HistoriesController = require('./controllers/HistoriesController')
 
 const isAuthenticated = require('./policies/isAuthenticated')*/
 
+//import models
+
+
 module.exports = (app) => {
   app.post('/register',
     AuthenticationControllerPolicy.register,

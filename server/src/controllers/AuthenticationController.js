@@ -1,7 +1,21 @@
+//import models
+var Shop = require('../models/shop');
+const User = require('../models/user');
+const jwt = require('jsonwebtoken')
+
+function jwtSignUser (user) {
+    const ONE_WEEK = 60*60*24*7
+    return jwt.sign(user, config.authentication.jwtSecret, {
+      expiresIn: ONE_WEEK
+    })
+}
+
 module.exports = {
   async register (req, res) {
     try {
-      const user = await User.create(req.body)
+      const user = await User.create(req.body.password)
+      user.password = use.encryptPassword(user.password)
+      console.log('nnnnnnnnnnnnn', user.password)
       const userJson = user.toJSON()
       res.send({
         user: userJson,
@@ -21,14 +35,13 @@ module.exports = {
           email: email
         }
       })
-
       if (!user) {
         return res.status(403).send({
           error: 'The login information was incorrect'
         })
       }
 
-      const isPasswordValid = await user.comparePassword(password)
+      const isPasswordValid = await user.validPassword(password)
       if (!isPasswordValid) {
         return res.status(403).send({
           error: 'The login information was incorrect'
@@ -42,7 +55,7 @@ module.exports = {
       })
     } catch (err) {
       res.status(500).send({
-        error: 'An error has occured trying to log in'
+        error: 'An error has occurred trying to log in'
       })
     }
   }

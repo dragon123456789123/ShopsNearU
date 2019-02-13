@@ -1,5 +1,5 @@
 <template>
-  <v-layout column>
+  <v-layout row wrap align-center>
     <v-flex xs6 offset-xs3>
         <v-toolbar flat dense class="cyan" dark>
           <v-toolbar-title>
@@ -30,7 +30,6 @@
                 @click="register">
           Register
         </v-btn>
-      </panel>
     </v-flex>
   </v-layout>
 </template>
@@ -61,4 +60,7 @@
 </script>
 
 <style scoped>
+    .danger-alert{
+        color: red;
+    }
 </style>
