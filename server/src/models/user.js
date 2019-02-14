@@ -25,12 +25,12 @@ var userSchema = new Schema({
 });
 
 
-userSchema.methods.encryptPassword = function(password) {
-  return bcrypt.hashSync(password, bcrypt.genSaltSync(5), null);
+userSchema.methods.encryptPassword = async function(password) {
+  return await bcrypt.hashSync(password, bcrypt.genSaltSync(5), null);
 };
 
 userSchema.methods.validPassword = function(password) {
-  return bcrypt.compareSync(password, this.password);  
+  return bcrypt.compareSync(password, this.password);
 };
 
 module.exports = mongoose.model('User', userSchema);
