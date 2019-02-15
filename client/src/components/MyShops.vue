@@ -1,7 +1,7 @@
 <template>
     <v-layout>
         <v-flex>
-            <panel title="Shops">
+            <panel title="MyShops">
                 <div v-for="shop in shops" :key="shop._id">
                     <v-flex xs4 id="shop">
                         <div class="row" id="shops">
@@ -12,8 +12,7 @@
                                         <h3>{{ shop.name }}</h3>
                                         <div class="clearfix">
                                             <div class="price pull-left">{{ shop.city }}</div>
-                                            <v-btn class="btn btn-success pull-right" @click="like(shop._id)">Like</v-btn>
-                                            <v-btn class="btn btn-danger pull-right" @click="dislike(shop._id)">Dislike</v-btn>
+                                            <v-btn class="btn btn-danger pull-right" @click="remove(shop._id)">Remove</v-btn>
                                         </div>
                                     </div>
                                 </div>
@@ -27,7 +26,7 @@
 </template>
 
 <script>
-  import ShopsService from '@/services/ShopsService'
+  import UserService from '@/services/UserService'
   import Panel from '@/components/Panel'
   export default {
     components:{
@@ -38,39 +37,24 @@
         shops: null,
       }
     },
-  /*  methods:{
-      async like (){
-        await ShopsService.post(this.shop)
-      },
-      dislike (){
-        Shop
-      }
-    }, */
+
     async mounted () {
       //request to back end
-      this.shops = (await ShopsService.index()).data
+      this.shops = (await UserService.index({
+        userId: this.$store.state.token
+      })).data
     },
     methods : {
-      async like (shopId) {
+      async remove (shopId) {
         try {
-            await ShopsService.like({
-              shopId,
-              userId: this.$store.state.token
-            })
+          await UserService.remove({
+            shopId,
+            userId: this.$store.state.token
+          })
         } catch (error) {
           this.error = error.response.data.error;
         }
       },
-        async dislike (shopId){
-          try{
-            await ShopsService.dislike({
-              shopId,
-              userId: this.$store.state.token
-            })
-          }catch (e) {
-              console.log(e)
-          }
-        }
     }
   }
 </script>

@@ -38,6 +38,13 @@
         Log Out
       </v-btn>
 
+      <v-btn v-if="$store.state.isUserLoggedIn"
+             @click="navigateTo({name:'myshops'})"
+             flat
+             dark>
+        MyShops
+      </v-btn>
+
     </v-toolbar-items>
   </v-toolbar>
 </template>

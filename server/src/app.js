@@ -29,6 +29,9 @@ app.use(session({
   cookie: { maxAge: 180 * 60 * 1000 }
 }));
 
+app.use(passport.initialize());
+app.use(passport.session());
+
 app.listen(process.env.PORT || 8081)
 
 module.exports = app;

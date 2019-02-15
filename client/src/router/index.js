@@ -4,7 +4,7 @@ import Register from '@/components/Register'
 import HelloWorld from '@/components/HelloWorld'
 import Login from '@/components/Login'
 import Shops from '@/components/Shops'
-
+import MyShops from '@/components/MyShops'
 
 
 Vue.use(Router)
@@ -25,6 +25,11 @@ export default new Router({
       path: '/login',
       name: 'login',
       component: Login
+    },
+    {
+      path: '/myshops',
+      name: 'myshops',
+      component: MyShops
     },
   ]
 })

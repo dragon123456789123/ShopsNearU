@@ -1,6 +1,8 @@
 const AuthenticationController = require('./controllers/AuthenticationController')
 const AuthenticationControllerPolicy = require('./policies/AuthenticationControllerPolicy')
 const ShopsController = require('./controllers/ShopsController')
+const UserController = require('./controllers/UserController')
+
 
 /* const SongsController = require('./controllers/SongsController')
 const BookmarksController = require('./controllers/BookmarksController')
@@ -19,5 +21,10 @@ module.exports = (app) => {
     AuthenticationController.login),
 
   app.get('/shops',
-      ShopsController.index)
+      ShopsController.index),
+    app.post('/shops',
+      ShopsController.like,
+      ShopsController.dislike),
+    app.post('/myshops',
+      UserController.index)
 }
