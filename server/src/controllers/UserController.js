@@ -7,9 +7,7 @@ module.exports = {
   async index(req, res) {
     try {
       var user = jwt.verify(req.body.userId,  config.authentication.jwtSecret);
-      var arr = user.shops;
       var userShops = await User.findById({_id: user._id}, 'shops')
-      console.log(userShops.shops)
       var shops = await Shop.find({_id: {$in: userShops.shops}});
       // console.log(shops)
       res.send(shops)
