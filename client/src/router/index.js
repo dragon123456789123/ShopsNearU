@@ -1,7 +1,6 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Register from '@/components/Register'
-import HelloWorld from '@/components/HelloWorld'
 import Login from '@/components/Login'
 import Shops from '@/components/Shops'
 import MyShops from '@/components/MyShops'
@@ -31,5 +30,9 @@ export default new Router({
       name: 'my-shops',
       component: MyShops
     },
+    {
+      path: '*',
+      redirect: 'shops'
+    }
   ]
 })

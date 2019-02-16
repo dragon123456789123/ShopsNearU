@@ -55,10 +55,12 @@
       navigateTo(route) {
         this.$router.push(route)
       },
-      logout() {
-        this.$store.dispatch('setUser', null)
-        this.$store.dispatch('setToken', null)
-        this.$router.push({
+      async logout() {
+        console.log('here')
+        this.store = await this.$store.dispatch('setUser', null)
+        this.store = await this.$store.dispatch('setToken', null)
+        console.log(this.store)
+        await this.$router.push({
           name: 'shops'
         })
       }

@@ -12,7 +12,7 @@
                                         <h3>{{ shop.name }}</h3>
                                         <div class="clearfix">
                                             <div class="price pull-left">{{ shop.city }}</div>
-                                            <v-btn class="btn btn-danger pull-right" @click="remove(shop._id)">Remove</v-btn>
+                                            <v-btn class="btn btn-danger pull-right" @click="remove(shop._id, key)">Remove</v-btn>
                                         </div>
                                     </div>
                                 </div>
@@ -45,13 +45,13 @@
       })).data
     },
     methods : {
-      async remove (shopId) {
+      async remove (shopId, key) {
         try {
-
           await UserService.remove({
             shopId,
             userId: this.$store.state.token
           })
+          this.shops.splice(key, 1)
         } catch (error) {
           console.log(error);
         }

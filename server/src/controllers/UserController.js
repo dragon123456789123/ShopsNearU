@@ -6,7 +6,7 @@ const config = require('../config/config')
 module.exports = {
   async index(req, res) {
     try {
-      var user = jwt.verify(req.body.userId,  config.authentication.jwtSecret);
+      var user = jwt.verify(req.body.userId, config.authentication.jwtSecret);
       var userShops = await User.findById({_id: user._id}, 'shops')
       var shops = await Shop.find({_id: {$in: userShops.shops}});
       // console.log(shops)
@@ -21,17 +21,13 @@ module.exports = {
   async remove(req, res) {
     try {
       var shopId = req.body.shopId;
-      var user = jwt.verify(req.body.userId,  config.authentication.jwtSecret)
-      await Shop.findById(shopId, async function(err, shop, req) {
-          User.update(
-            {_id: user._id},
-            {$pull: { shops: shop._id}},
-            { safe: true, multi:true },
-            function () {
-              console.log("done")
-            }
-          )
-      })
+      var user = jwt.verify(req.body.userId, config.authentication.jwtSecret)
+      var updatedUser = await User.update(
+        {_id: user._id},
+        {$pull: {shops: shopId}}
+      )
+      console.log(updatedUser)
+      res.send(updatedUser)
     } catch (err) {
       console.log(err)
       res.status(500).send({

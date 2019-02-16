@@ -12,8 +12,8 @@
                                         <h3>{{ shop.name }}</h3>
                                         <div class="clearfix">
                                             <div class="price pull-left">{{ shop.city }}</div>
-                                            <v-btn class="btn btn-success pull-right" @click="like(shop._id)">Like</v-btn>
-                                            <v-btn class="btn btn-danger pull-right" @click="dislike(shop._id)">Dislike</v-btn>
+                                            <v-btn class="btn btn-success pull-right" @click="like(shop._id, key)">Like</v-btn>
+                                            <v-btn class="btn btn-danger pull-right" @click="dislike(shop._id, key)">Dislike</v-btn>
                                         </div>
                                     </div>
                                 </div>
@@ -29,6 +29,7 @@
 <script>
   import ShopsService from '@/services/ShopsService'
   import Panel from '@/components/Panel'
+
   export default {
     components:{
       Panel
@@ -38,36 +39,39 @@
         shops: null,
       }
     },
-  /*  methods:{
-      async like (){
-        await ShopsService.post(this.shop)
-      },
-      dislike (){
-        Shop
-      }
-    }, */
+
+    /*  methods:{
+        async like (){
+          await ShopsService.post(this.shop)
+        },
+        dislike (){
+          Shop
+        }
+      }, */
     async mounted () {
       //request to back end
       this.shops = (await ShopsService.index({userId: this.$store.state.token})).data
     },
 
     methods : {
-      async like (shopId) {
+      async like (shopId, key) {
         try {
             await ShopsService.like({
               shopId,
               userId: this.$store.state.token
             })
+          this.shops.splice(key, 1)
         } catch (error) {
           console.log(error);
         }
       },
-        async dislike (shopId){
+        async dislike (shopId, key){
           try{
             await ShopsService.dislike({
               shopId,
               userId: this.$store.state.token
             })
+            this.shops.splice(key, 1)
           }catch (e) {
               console.log(e)
           }
