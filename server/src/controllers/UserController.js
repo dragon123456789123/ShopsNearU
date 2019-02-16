@@ -18,4 +18,25 @@ module.exports = {
       })
     }
   },
+  async remove(req, res) {
+    try {
+      var shopId = req.body.shopId;
+      var user = jwt.verify(req.body.userId,  config.authentication.jwtSecret)
+      await Shop.findById(shopId, async function(err, shop, req) {
+          User.update(
+            {_id: user._id},
+            {$pull: { shops: shop._id}},
+            { safe: true, multi:true },
+            function () {
+              console.log("done")
+            }
+          )
+      })
+    } catch (err) {
+      console.log(err)
+      res.status(500).send({
+        error: 'an error has occurred trying to remove shops'
+      })
+    }
+  }
 }

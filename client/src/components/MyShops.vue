@@ -47,12 +47,13 @@
     methods : {
       async remove (shopId) {
         try {
+
           await UserService.remove({
             shopId,
             userId: this.$store.state.token
           })
         } catch (error) {
-          this.error = error.response.data.error;
+          console.log(error);
         }
       },
     }
@@ -64,5 +65,4 @@
         float: left;
         margin: 10px;
     }
-
 </style>

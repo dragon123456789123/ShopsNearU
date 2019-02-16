@@ -5,12 +5,10 @@ export default {
     return Api().get('shops')
   },
   like (shop) {
-    return Api().post('shops', shop)
+    return Api().post('like-shops', shop)
   },
   dislike (shop) {
-    return Api().post('shops', shop)
+    return Api().delete('shops/', shop)
   },
-  remove (shop) {
-    return Api().post('shops', shop)
-  }
+
 }

@@ -50,6 +50,7 @@
       //request to back end
       this.shops = (await ShopsService.index()).data
     },
+
     methods : {
       async like (shopId) {
         try {
@@ -58,7 +59,7 @@
               userId: this.$store.state.token
             })
         } catch (error) {
-          this.error = error.response.data.error;
+          console.log(error);
         }
       },
         async dislike (shopId){

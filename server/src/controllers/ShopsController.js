@@ -23,7 +23,7 @@ module.exports = {
       var user = jwt.verify(req.body.userId,  config.authentication.jwtSecret)
       //console.log(user)
       var t = user.shops.indexOf(shopId);
-      console.log(t)
+      //console.log(t)
 
       if(t==-1){
         Shop.findById(shopId, async function(err, shop, req) {
@@ -53,13 +53,4 @@ module.exports = {
       })
     }
   },
-  async remove (req, res){
-    try{
-
-    } catch (err) {
-      res.status(500).send({
-        error: 'an error has occurred trying to like shops'
-      })
-    }
-  }
 }

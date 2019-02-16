@@ -10,9 +10,13 @@ import store from '@/store/store'
 import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import Panel from '@/components/Panel'
+
 
 Vue.use(Vuetify)
 Vue.use(BootstrapVue);
+
+Vue.component('panel', Panel)
 
 Vue.config.productionTip = false
 

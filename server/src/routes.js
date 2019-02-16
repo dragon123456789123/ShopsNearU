@@ -22,9 +22,11 @@ module.exports = (app) => {
 
   app.get('/shops',
       ShopsController.index),
-    app.post('/shops',
-      ShopsController.like,
-      ShopsController.dislike),
-    app.post('/myshops',
-      UserController.index)
+    app.post('/like-shops',
+      ShopsController.like),
+
+  app.post('/my-shops',
+      UserController.index),
+  app.post('/remove-shops',
+    UserController.remove)
 }

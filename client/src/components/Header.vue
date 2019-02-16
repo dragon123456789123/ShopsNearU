@@ -39,7 +39,7 @@
       </v-btn>
 
       <v-btn v-if="$store.state.isUserLoggedIn"
-             @click="navigateTo({name:'myshops'})"
+             @click="navigateTo({name:'my-shops'})"
              flat
              dark>
         MyShops
@@ -59,7 +59,7 @@
         this.$store.dispatch('setUser', null)
         this.$store.dispatch('setToken', null)
         this.$router.push({
-          name: 'songs'
+          name: 'shops'
         })
       }
     }

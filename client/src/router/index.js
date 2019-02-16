@@ -27,8 +27,8 @@ export default new Router({
       component: Login
     },
     {
-      path: '/myshops',
-      name: 'myshops',
+      path: '/my-shops',
+      name: 'my-shops',
       component: MyShops
     },
   ]
