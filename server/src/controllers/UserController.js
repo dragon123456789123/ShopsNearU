@@ -8,8 +8,10 @@ module.exports = {
     try {
       var user = jwt.verify(req.body.userId,  config.authentication.jwtSecret);
       var arr = user.shops;
-      //console.log(arr)
-      var shops = await Shop.find({_id: {$in: arr}});
+      var userShops = await User.findById({_id: user._id}, 'shops')
+      console.log(userShops.shops)
+      var shops = await Shop.find({_id: {$in: userShops.shops}});
+      // console.log(shops)
       res.send(shops)
     } catch (err) {
       console.log(err)

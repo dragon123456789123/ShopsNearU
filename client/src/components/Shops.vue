@@ -48,7 +48,7 @@
     }, */
     async mounted () {
       //request to back end
-      this.shops = (await ShopsService.index()).data
+      this.shops = (await ShopsService.index({userId: this.$store.state.token})).data
     },
 
     methods : {

@@ -20,10 +20,12 @@ module.exports = (app) => {
   app.post('/login',
     AuthenticationController.login),
 
-  app.get('/shops',
+  app.post('/shops',
       ShopsController.index),
     app.post('/like-shops',
       ShopsController.like),
+    app.post('/dislike-shops',
+      ShopsController.dislike)
 
   app.post('/my-shops',
       UserController.index),
