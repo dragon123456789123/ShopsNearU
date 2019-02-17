@@ -11,7 +11,10 @@ import BootstrapVue from 'bootstrap-vue'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import Panel from '@/components/Panel'
+import VueGeolocation from 'vue-browser-geolocation';
 
+
+Vue.use(VueGeolocation);
 
 Vue.use(Vuetify)
 Vue.use(BootstrapVue);

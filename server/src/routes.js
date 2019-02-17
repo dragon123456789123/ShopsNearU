@@ -21,6 +21,7 @@ module.exports = (app) => {
     AuthenticationController.login),
 
   app.post('/shops',
+
       ShopsController.index),
     app.post('/like-shops',
       ShopsController.like),

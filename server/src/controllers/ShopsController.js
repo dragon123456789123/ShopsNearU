@@ -27,22 +27,20 @@ module.exports = {
       }
       if (user != null && userDisliked.disliked != null) {
         console.log(userDisliked)
-        await userDisliked.disliked.forEach(function (shop) {
+        await userDisliked.disliked.forEach(async function (shop) {
 
           var duration = moment.duration(moment.max().diff(shop.time))
           var seconds = duration.asSeconds();
           console.log(seconds)
           for (var i = 0; i < shops.length; i++) {
-            if ((JSON.stringify(shops[i]._id) == JSON.stringify(shop.shop)) && (seconds < 15)) {
+            if ((JSON.stringify(shops[i]._id) == JSON.stringify(shop.shop)) && (seconds < 5)) {
               shops.splice(i, 1);
-            } else if (seconds > 15) {
-              User.update(
+            } else if (seconds > 5) {
+              var updatedUser = await User.update(
                 {_id: user._id},
                 {$pull: {disliked: shop}},
-                function (data) {
-                  console.log('donooooooooo')
-                }
               )
+              res.send(updatedUser)
             }
           }
         });
