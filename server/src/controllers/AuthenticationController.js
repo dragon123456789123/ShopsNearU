@@ -17,14 +17,15 @@ function encryptPassword (password) {
   return bcrypt.hashSync(password, bcrypt.genSaltSync(5), null);
 };
 
-
+//controllers
 module.exports = {
   async register (req, res) {
     try {
       req.body.password = encryptPassword(req.body.password)
       const user = await User.create(req.body)
+      const userJson = user.toJSON()
       res.send({
-        user: user,
+        user: userJson,
         token: jwtSignUser(user)
       })
     } catch (err) {
@@ -41,7 +42,6 @@ module.exports = {
           email: email
       });
       if (!user) {
-        console.log('nnnnnnnnnnn')
         return res.status(403).send({
           error: 'The login information was incorrect'
         })
@@ -49,7 +49,6 @@ module.exports = {
 
       const isPasswordValid = await user.validPassword(password)
       if (!isPasswordValid) {
-        console.log('n')
         return res.status(403).send({
           error: 'The login information was incorrect'
         })

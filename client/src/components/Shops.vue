@@ -42,16 +42,7 @@
       }
     },
 
-    /*  methods:{
-        async like (){
-          await ShopsService.post(this.shop)
-        },
-        dislike (){
-          Shop
-        }
-      }, */
     async mounted () {
-      console.log('nnnnnnnnnnnn')
       //request to back end
       this.shops = (await ShopsService.index({userId: this.$store.state.token})).data
       await this.$getLocation({
@@ -60,9 +51,7 @@
         maximumAge: 0 //defaults to 0
       })
         .then(coordinates => {
-          console.log(coordinates.lat)
           for ( var i = 0; i < this.shops.length; i++) {
-            console.log(this.shops[i])
             this.shops[i]["distance"] = calculateDistance(coordinates.lat,coordinates.lng,this.shops[i].location.coordinates[1],this.shops[i].location.coordinates[0],"K");
           }
           this.shops.sort(function(a, b) {
@@ -72,6 +61,7 @@
     },
 
     methods : {
+      //like method
       async like (shopId, key) {
         try {
             if(this.$store.state.token==null){
@@ -90,7 +80,9 @@
           console.log(error);
         }
       },
-        async dislike (shopId, key){
+
+      //dislike method
+      async dislike (shopId, key){
           try{
             if(this.$store.state.token==null){
               await this.$router.push({
@@ -108,27 +100,6 @@
               console.log(e)
           }
         },
-      distance(lat1, lon1, lat2, lon2, unit) {
-    if ((lat1 == lat2) && (lon1 == lon2)) {
-      return 0;
-    }
-    else {
-      var radlat1 = Math.PI * lat1/180;
-      var radlat2 = Math.PI * lat2/180;
-      var theta = lon1-lon2;
-      var radtheta = Math.PI * theta/180;
-      var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
-      if (dist > 1) {
-        dist = 1;
-      }
-      dist = Math.acos(dist);
-      dist = dist * 180/Math.PI;
-      dist = dist * 60 * 1.1515;
-      if (unit=="K") { dist = dist * 1.609344 }
-      if (unit=="N") { dist = dist * 0.8684 }
-      return dist;
-    }
-  },
     }
   }
 </script>

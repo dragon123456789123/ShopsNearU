@@ -5,7 +5,7 @@ var jwt = require('jsonwebtoken')
 const config = require('../config/config')
 const moment = require('moment')
 
-
+//controllers
 module.exports = {
   async index(req, res) {
     try {
@@ -14,8 +14,8 @@ module.exports = {
         var userShops = await User.findById({_id: user._id}, 'shops')
         var userDisliked = await User.findById({_id: user._id}, 'disliked')
       }
-      console.log('nnnnnnnnnn', userShops)
-      const shops = await Shop.find({}).limit(10);
+      const shops = await Shop.find({});
+      //removing liked shops from main page
       if (user != null && userShops.shops != null) {
         await userShops.shops.forEach(function (shop) {
           for (var i = 0; i < shops.length; i++) {
@@ -25,13 +25,11 @@ module.exports = {
           }
         });
       }
+      // removing disliked shops from main page
       if (user != null && userDisliked.disliked != null) {
-        console.log(userDisliked)
         await userDisliked.disliked.forEach(async function (shop) {
-
           var duration = moment.duration(moment.max().diff(shop.time))
           var seconds = duration.asSeconds();
-          console.log(seconds)
           for (var i = 0; i < shops.length; i++) {
             if ((JSON.stringify(shops[i]._id) == JSON.stringify(shop.shop)) && (seconds < 5)) {
               shops.splice(i, 1);
@@ -40,12 +38,11 @@ module.exports = {
                 {_id: user._id},
                 {$pull: {disliked: shop}},
               )
-              res.send(updatedUser)
+              res.send(updatedUser)         //inform frontend of update
             }
           }
         });
       }
-      console.log(shops)
       res.send(shops)
     } catch (err) {
       res.status(500).send({
@@ -55,24 +52,17 @@ module.exports = {
   },
   async like(req, res) {
     try {
-      //console.log(req.body)
       var shopId = req.body.shopId;
       var user = jwt.verify(req.body.userId, config.authentication.jwtSecret)
       var userShops = await User.findById({_id: user._id}, 'shops')
-      //console.log(user)
       var t = userShops.shops.indexOf(shopId);
-      //console.log(t)
-
-      var send = 'test'
       if (t == -1) {
         var updatedUser = await User.update(
           {_id: user._id},
           {$push: {shops: shopId}}
         )
-        console.log(updatedUser)
-        send = updatedUser
       }
-      res.send(updatedUser)
+      res.send(updatedUser)     //inform frontend of update
     } catch (err) {
       res.status(500).send({
         error: 'an error has occurred trying to like shops'
@@ -84,7 +74,6 @@ module.exports = {
       var shopId = req.body.shopId;
       var user = jwt.verify(req.body.userId, config.authentication.jwtSecret)
       var userDisliked = await User.findById({_id: user._id}, 'disliked')
-      console.log(user)
       let n = 0
       for (let disliked of userDisliked.disliked) {
         if (disliked.shop.toString() == shopId.toString()) {
@@ -98,7 +87,7 @@ module.exports = {
             {$push: {disliked: {shop: shopId}}},
           )
       }
-      res.send(updatedUser)
+      res.send(updatedUser)     //inform frontend of update
     } catch (err) {
       res.status(500).send({
         error: 'an error has occurred trying to like shops'

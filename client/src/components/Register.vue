@@ -26,6 +26,10 @@
                     @click="register">
               Register
             </v-btn>
+            <br>
+            <div></div>
+            <br>
+            <p>Already have an account? <v-btn dark @click="navigateTo({name:'login'})">Log in instead!</v-btn></p>
         </panel>
     </v-flex>
   </v-layout>
@@ -44,19 +48,31 @@
       }
     },
     methods: {
+      //navigate method
+      navigateTo(route) {
+        this.$router.push(route)
+      },
+      //register method
       async register () {
         try {
+          //send user data to backend
           const response = await AuthenticationService.register({
             email: this.email,
             password: this.password
           })
+          //set user state
           this.$store.dispatch('setToken', response.data.token)
           this.$store.dispatch('setUser', response.data.user)
+          //redirect to main component
+          this.$router.push({
+            name: 'shops'
+          })
         } catch (error) {
           this.error = error.response.data.error
         }
       }
     },
+    //including panel component
     components:{
       Panel
     }

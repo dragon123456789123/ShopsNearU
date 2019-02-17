@@ -1,7 +1,7 @@
 <template>
   <v-toolbar fixed class="cyan" dark>
     <v-toolbar-title class="mr-4">
-      <v-btn @click="navigateTo({name: 'root'})" flat dark>
+      <v-btn @click="navigateTo({name: 'shops'})" flat dark>
         ShopsNearU
       </v-btn>
     </v-toolbar-title>
@@ -56,10 +56,10 @@
         this.$router.push(route)
       },
       async logout() {
-        console.log('here')
+        //set user data to null
         this.store = await this.$store.dispatch('setUser', null)
         this.store = await this.$store.dispatch('setToken', null)
-        console.log(this.store)
+        //redirect to main page
         await this.$router.push({
           name: 'shops'
         })

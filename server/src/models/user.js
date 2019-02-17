@@ -3,7 +3,7 @@ var Schema = mongoose.Schema;
 var bcrypt = require('bcrypt-nodejs');
 
 var userSchema = new Schema({
-    email: {type: String, required: true},
+    email: {type: String, required: true, unique: true},
     password: {type: String, required: true},
     shops: [
         {
@@ -23,11 +23,6 @@ var userSchema = new Schema({
         }
     ],
 });
-
-
-userSchema.methods.encryptPassword = async function(password) {
-  return await bcrypt.hashSync(password, bcrypt.genSaltSync(5), null);
-};
 
 userSchema.methods.validPassword = function(password) {
   return bcrypt.compareSync(password, this.password);

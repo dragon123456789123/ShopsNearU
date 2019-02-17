@@ -7,40 +7,11 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
   </head>
   <body>
-    <div id="app"></div>
+    <div id="app">
+      <div class="app__loading-spinner"></div>
+    </div>
     <!-- built files will be auto injected -->
-    <script defer src="//cdn.jsdelivr.net/gh/chrisveness/geodesy@1.1.3/latlon-spherical.js"></script>
-    <script defer src="//cdn.jsdelivr.net/gh/chrisveness/geodesy@1.1.3/dms.js"></script>
-    <script>
-      // window.onload = function() {
-      //   navigator.geolocation.getCurrentPosition(sortResults);
-      // }
 
-      // function sortResults(position) {
-      //   // Grab current position
-      //   var latlon = new LatLon(position.coords.latitude, position.coords.longitude);
-      //
-      //   var shops = document.getElementById('shops');
-      //   var locationList = document.querySelectorAll('div.col-md-4 col-centered');
-      //   var locationArray = Array.prototype.slice.call(locationList, 0);
-      //
-      //   locationArray.sort(function(a,b){
-      //     var locA  = a.getAttribute('location.coordinates');
-      //     var locB  = b.getAttribute('location.coordinates');
-      //
-      //     distA = latlon.distanceTo(new LatLon(Number(locA[0]),Number(locA[1])));
-      //     distB = latlon.distanceTo(new LatLon(Number(locB[0]),Number(locB[1])));
-      //     return distA - distB;
-      //   });
-      //
-      //   //Reorder the list
-      //   shops.innerHTML = "";
-      //   locationArray.forEach(function(el) {
-      //     shops.appendChild(el);
-      //     console.log(shops)
-      //   });
-      // };
-    </script>
   </body>
 
 </html>

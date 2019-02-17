@@ -26,6 +26,10 @@
                         @click="login">
                     Login
                 </v-btn>
+                <br>
+                <div></div>
+                <br>
+                <p>Don't have an account? <v-btn dark @click="navigateTo({name:'register'})">Sign up instead!</v-btn></p>
             </panel>
         </v-flex>
     </v-layout>
@@ -44,14 +48,22 @@
       }
     },
     methods: {
+      //navigate method
+      navigateTo(route) {
+          this.$router.push(route)
+        },
+
+      //login methods
       async login () {
         try {
           const response = await AuthenticationService.login({
             email: this.email,
             password: this.password
           })
+          //set user data after login
           this.$store.dispatch('setToken', response.data.token)
           this.$store.dispatch('setUser', response.data.user)
+          //redirect to main page
           this.$router.push({
             name: 'shops'
           })
