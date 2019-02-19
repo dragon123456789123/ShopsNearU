@@ -12,7 +12,7 @@
                                         <h3>{{ shop.name }}</h3>
                                         <div class="clearfix">
                                             <div class="price pull-left">City: {{ shop.city }} </div>
-                                            <div class="price pull-left">Distance: {{ shop.distance.toFixed(2) }} Km</div>
+                                            <div class="price pull-left">Distance: {{ shop.distance }} Km</div>
                                             <v-btn class="btn btn-success pull-right" @click="like(shop._id, key)">Like</v-btn>
                                             <v-btn class="btn btn-danger pull-right" @click="dislike(shop._id, key)">Dislike</v-btn>
                                         </div>
@@ -39,6 +39,7 @@
     data () {
       return {
         shops: null,
+        key: null
       }
     },
 
@@ -52,7 +53,7 @@
       })
         .then(coordinates => {
           for ( var i = 0; i < this.shops.length; i++) {
-            this.shops[i]["distance"] = calculateDistance(coordinates.lat,coordinates.lng,this.shops[i].location.coordinates[1],this.shops[i].location.coordinates[0],"K");
+            this.shops[i]["distance"] = calculateDistance(coordinates.lat,coordinates.lng,this.shops[i].location.coordinates[1],this.shops[i].location.coordinates[0],"K").toFixed(2);
           }
           this.shops.sort(function(a, b) {
             return a.distance - b.distance;
