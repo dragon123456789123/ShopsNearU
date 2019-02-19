@@ -31,7 +31,7 @@ Implement an app that list shops nearby
 
 ##### 1. Clone the repository using the following command in terminal:
 
-        git clone https://github.com/hamzaBentahar/ShopsNearU.git nearbyshops
+        git clone https://github.com/dragon123456789123/ShopsNearU.git nearbyshops
     
 ##### 2. Move to project root folder
     
