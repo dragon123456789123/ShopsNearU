@@ -1,6 +1,6 @@
 ## About ShopsNearU
 
-Implement an app that list shops nearby
+Implement an app that lists shops nearby
 
 ## Overview
 
@@ -31,11 +31,11 @@ Implement an app that list shops nearby
 
 ##### 1. Clone the repository using the following command in terminal:
 
-        git clone https://github.com/dragon123456789123/ShopsNearU.git nearbyshops
+        git clone https://github.com/dragon123456789123/ShopsNearU.git ShopsNearU
     
 ##### 2. Move to project root folder
     
-        cd nearbyshops
+        cd ShopsNearU
   
 ##### 3. Install Vue dependencies:
 
