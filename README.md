@@ -31,42 +31,43 @@ Implement an app that list shops nearby
 
 ##### 1. Clone the repository using the following command in terminal:
 
-    git clone https://github.com/hamzaBentahar/ShopsNearU.git nearbyshops
+        git clone https://github.com/hamzaBentahar/ShopsNearU.git nearbyshops
     
 ##### 2. Move to project root folder
     
-    cd nearbyshops
+        cd nearbyshops
   
 ##### 3. Install Vue dependencies:
 
-    cd client
-    npm install --save
+        cd client
+        npm install --save
   
 ##### 3. Install Node dependencies:
       
-      cd server
-      npm install --save
-      
-##### 4. Setup MongoDB database:
-
-      run mongod
-      
-##### 5. Seed MongoDB with shops data:
+        cd server
+        npm install --save
+            
+##### 4. Seed MongoDB with shops data:
     
-      run mongo 
-      > db.createCollection("shops")
-      cd to bin file of the MongoDB Server
-      > mongorestore -d shopdb -c shops 'path to bson shops file'
+        run mongo 
+        > db.createCollection("shops")
+        cd to bin file of the MongoDB Server
+        > mongorestore -d shopdb -c shops 'path to bson shops file'
       
-##### 6. Run Application
-1. run back-end:
+## Run Project
 
-    cd server
-    nodemone src/app.js
+##### 1. Run MongoDB database:
+        
+        run mongod
+      
+##### 2. Run Server:
 
-2. run front-end:
+        cd server
+        nodemone src/app.js
 
-    cd client
-    npm run dev
+##### 3. Run Client:
+
+        cd client
+        npm run dev
     
-3. open browser on localhost:8080
+##### 4. Open Browser on localhost:8080:
