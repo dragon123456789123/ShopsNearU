@@ -47,6 +47,15 @@
         error: null
       }
     },
+
+    async mounted () {
+      //redirect to main page if user is already logged in
+      if ( await this.$store.state.isUserLoggedIn ) {
+        this.$router.push({name: "shops"})
+        return
+      }
+    },
+
     methods: {
       //navigate method
       navigateTo(route) {

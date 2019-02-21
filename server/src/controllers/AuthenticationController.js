@@ -1,5 +1,4 @@
 //import models
-var Shop = require('../models/shop');
 const User = require('../models/user');
 const jwt = require('jsonwebtoken');
 const config = require('../config/config')

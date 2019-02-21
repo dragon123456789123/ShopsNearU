@@ -50,12 +50,11 @@
     },
 
     async mounted () {
-      // if(this.$store.state.token==null) {
-      //   this.$router.push({
-      //     name: 'login'
-      //   })
-      // }
-      //request to back end to get user's shops
+      //check if user is logged in otherwise redirect to login page
+      if(await !this.$store.state.isUserLoggedIn){
+        this.$router.push({ name: "login"})
+        return
+      }
       this.shops = (await UserService.index({
         userId: this.$store.state.token
       })).data;

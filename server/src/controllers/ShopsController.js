@@ -7,6 +7,8 @@ const moment = require('moment')
 
 //controllers
 module.exports = {
+
+  //render shops
   async index(req, res) {
     try {
       if (req.body.userId != null) {
@@ -50,6 +52,8 @@ module.exports = {
       })
     }
   },
+
+  //like shops feature
   async like(req, res) {
     try {
       var shopId = req.body.shopId;
@@ -69,6 +73,8 @@ module.exports = {
       })
     }
   },
+
+  //dislike shops feature
   async dislike(req, res) {
     try {
       var shopId = req.body.shopId;
